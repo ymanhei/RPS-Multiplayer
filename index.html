@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>RPS-Multiplayer</title>
+
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Bootstrap CDN-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <!-- Firebase References -->
+  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <br>
+
+    <!-- Jumbotron Title -->
+    <div class="jumbotron">
+      <h1 class="text-center">Welcome to RPS-Multiplayer</h1>
+      <h3 class="text-center">"Realtime Online game"</h3>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <button class="btn btn-primary" id="rock" type="submit">Rock</button>
+            <button class="btn btn-primary" id="paper" type="submit">Paper</button>
+            <button class="btn btn-primary" id="scissors" type="submit">Scissors</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Current Product -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-4 col-sm-offset-2">
+                <img class="img-fluid thumbnail center-block" src="http://graphitepublications.com/wp-content/uploads/2015/04/5-Coding-Challenges-to-Help-You-Train-Your-Brain.jpg"
+                  alt="Coding Brain">
+              </div>
+              <div class="col-sm-6">
+                <h3 class="">
+                  <strong>Your Choice:</strong>
+                  <span id="yourchoice"></span>
+                </h3>
+                <h3 class="">
+                  <strong>Oppoent's Choice:</strong>
+                  <span id="hischoice"></span>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Make Your Bid -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h3>
+                <span id="watchers"></span> is with you !</span>
+              </h3>
+          </div>
+          <div class="card-body">
+            <div class="col-sm-3 col-sm-offset-4 frame">
+                <ul></ul>
+                <div>
+                    <div class="msj-rta macro" style="margin:auto">                        
+                        <div class="text text-r" style="background:whitesmoke !important">
+                            <input class="mytext" placeholder="Type a message"/>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+    
+
+  <!-- JavaScript -->
+  <script src="assets/javascript/game.js"></script>
+
+</body>
+
+</html>
