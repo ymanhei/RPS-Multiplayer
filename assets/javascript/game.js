@@ -1,4 +1,7 @@
 var playername = prompt("What is your name?")
+var yourchoice = "";
+var hischoice = "";
+var uid;
 
 // Assign the reference to the database to a variable named 'database'
 // var database = ...
@@ -38,8 +41,12 @@ console.log(snap.val());
 
     // Add user to the connections list.
     var con = connectionsRef.push({connected: true,
-        playername: playername});
+        playername: playername
+    });
+    uid = con.key;
+       console.log(uid);
 
+    
     // Remove user from the connection list when they disconnect.
     con.onDisconnect().remove();
   }
@@ -50,45 +57,74 @@ connectionsRef.on("value", function(snapshot) {
 
   // Display the viewer count in the html.
   // The number of online users is the number of children in the connections list.
-  console.log(snapshot.val());
+  //console.log(snapshot.val());
   //$("#watchers").text(snapshot.numChildren());
   var objarray = snapshot.val();
   $.each(objarray,function() {
     if (this.playername !== playername)  {
         $("#watchers").text(this.playername);
-
+        if (this.yourchoice != null) {
+            hischoice = this.yourchoice;
+            console.log(hischoice);
+            $("#hischoice").text("?");            
+        }
     }
-
 });
 
 
-});
 
+
+if (yourchoice == "Rock" && hischoice == "Rock" || yourchoice == "Paper" && hischoice == "paper" || yourchoice == "Scissor" && hischoice == "Scissor") {
+    $("#hischoice").text(hischoice);
+    $("#result").text("It's a Draw"); 
+}
+else if (yourchoice == "Rock" && hischoice == "Paper" || yourchoice == "Paper" && hischoice == "Scissor" || yourchoice == "Scissor" && hischoice == "Rock"){
+    $("#hischoice").text(hischoice);
+    $("#result").text("You Loss!"); 
+}
+else if (yourchoice == "Rock" && hischoice == "Scissor" || yourchoice == "Paper" && hischoice == "Rock" || yourchoice == "Scissor" && hischoice == "Paper"){
+    $("#hischoice").text(hischoice);
+    $("#result").text("You Win!"); 
+}
+
+
+});
 
 var chat = database.ref("/chats");
 chat.on("value", function(snapshot) {
     resetChat();
     var objarray = snapshot.val();
-    console.log(objarray);
-    
+    //.log(objarray);
     $.each(objarray,function() {
         insertChat("me", this.text);  
-
     });
-
-
   });
 
 // -------------------------------------------------------------- (CRITICAL - BLOCK) --------------------------- //
 
+$(".btn").on("click", function(event) {
+    event.preventDefault();
+    yourchoice = $(this).text();
+    //console.log(yourchoice);
+    $("#yourchoice").html(yourchoice);
+    var connectionsRef = database.ref("/connections");
 
+    //console.log(connectionsRef);
+    connectionsRef.child(uid).update({yourchoice: yourchoice});
 
+  });
 
+  $(".button").on("click", function(event) {
+    event.preventDefault();
+    yourchoice = "";
+    hischoice = "";
+    $("#hischoice").text(""); 
+    $("#yourchoice").text(""); 
+    $("#result").text(""); 
 
+  });
 
-
-
-
+// Copied from somewhere on the internet //
 var me = {};
 
 var you = {};
